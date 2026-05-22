@@ -15,7 +15,7 @@ from pathlib import Path
 def ingest (law="estg"):
 
     # create folder for data if it doesn't exist
-    target_dir = (Path.home() / "Downloads" / "Steuergesetze")
+    target_dir = (Path.home() / "Downloads" / "Steuergesetze" / "raw")
 
     if not target_dir.exists():
         target_dir.mkdir(parents=True, exist_ok=True)
