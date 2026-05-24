@@ -39,15 +39,3 @@ def ingest (law="estg"):
 
 if __name__ == "__main__":
     ingest()
-
-
-
-
-
-
-
-
-
-
-
-
