@@ -17,11 +17,18 @@ def parse_xml(xmlfile):
         enbez = norm.find("enbez").text if norm.find("enbez") else None
         titel = norm.find("titel").text if norm.find("titel") else None
 
-        data.append({
-            "jurabk": jurabk,
-            "enbez": enbez,
-            "titel": titel
-        })
+        paragraphs = norm.find_all("P")
+
+        for i, p in enumerate(paragraphs, start=1):
+            paragraph_text = p.get_text(strip=True)
+
+            data.append({
+                "jurabk": jurabk,
+                "enbez": enbez,
+                "titel": titel,
+                "paragraph_number": i,
+                "paragraph_text": paragraph_text
+            })
 
     df = pd.DataFrame(data)
 
@@ -29,6 +36,7 @@ def parse_xml(xmlfile):
 
 
 if __name__ == "__main__":
-    path = Path.home() / "Downloads" / "Steuergesetze" / "extracted" / "estg.xml"
-    df = parse_xml(path)
-    df.to_csv("estg.csv", index=False)
+    extr_path = Path.home() / "Downloads" / "Steuergesetze" / "extracted" / "estg.xml"
+    df = parse_xml(extr_path)
+    pars_path = Path.home() / "Downloads" / "Steuergesetze" / "extracted" / "estg.csv"
+    df.to_csv(pars_path, index=False)
